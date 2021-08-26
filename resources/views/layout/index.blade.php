@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    @include('layout.flash')
     @yield('main')
     <script src="{{asset('js/app.js')}}"></script>
 </body>

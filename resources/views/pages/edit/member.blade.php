@@ -9,7 +9,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Age</label>
-        <input type="number" name="age" value="{{$edit->test}}" class="form-control" id="exampleInputPassword1">
+        <input type="number" name="age" value="{{$edit->age}}" class="form-control" id="exampleInputPassword1">
     </div>
     <div class="mb-3">
         <select class="form-select"  aria-label="Default select example" name='gender'>
@@ -21,7 +21,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Profile img</label>
-        <input type="file" name="img" value="{{$edit->img}}" class="form-control" id="exampleInputPassword1">
+        <input type="file" name="img" value="{{$edit->''}}" class="form-control" id="exampleInputPassword1">
     </div>
     <button class="btn btn-success" type='submit'>SUBMIT</button>
 </form>

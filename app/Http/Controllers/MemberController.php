@@ -46,10 +46,10 @@ class MemberController extends Controller
         $store->name = $request->name;
         $store->age = $request->age;
         $store->gender = $request->gender;
-        $request->file('img')->storePublicly('img/','public');
+        $request->file('img')->storePublicly('img/', 'public');
         $store->img = $request->file('img')->hashName();
         $store->save();
-        return redirect('/')->with('success','Member Created');
+        return redirect('/')->with('success', 'Member Created');
     }
 
     /**
@@ -73,7 +73,7 @@ class MemberController extends Controller
     {
         $genders = Gender::all();
         $edit = $member;
-        return view('pages.edit.member',compact('edit','genders'));
+        return view('pages.edit.member', compact('edit', 'genders'));
     }
 
     /**
@@ -93,11 +93,13 @@ class MemberController extends Controller
         $store->name = $request->name;
         $store->age = $request->age;
         $store->gender = $request->gender;
-        Storage::disk('public')->delete('img/'.$store->img);
-        $request->file('img')->storePublicly('img/','public');
-        $store->img = $request->file('img')->hashName();
+        if ($request->file('img') != null) {
+            Storage::disk('public')->delete('img/' . $store->img);
+            $request->file('img')->storePublicly('img/', 'public');
+            $store->img = $request->file('img')->hashName(); # code...
+        }
         $store->save();
-        return redirect('/')->with('success','Member Updated');
+        return redirect('/')->with('success', 'Member Updated');
     }
 
     /**
@@ -108,13 +110,13 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        Storage::disk('public')->delete('img/'.$member->img);
+        Storage::disk('public')->delete('img/' . $member->img);
         $member->delete();
         return redirect()->back();
     }
 
     public function download(Member $member)
     {
-        return response()->download(public_path('img/'.$member->img));
+        return response()->download(public_path('img/' . $member->img));
     }
 }
